@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "Nazwa": "Monitor",
+    "Opis": "HP",
+    "Kategoria": "Urządzenia peryferyjne",
+    "Cena": 1000
+  },
+  {
+    "id": 2,
+    "Nazwa": "Monitor",
+    "Opis": "Asus",
+    "Kategoria": "Urządzenia peryferyjne",
+    "Cena": 1200
+  }
+]
