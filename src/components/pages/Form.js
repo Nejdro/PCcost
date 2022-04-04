@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import "./Form.css";
 import { Link } from "react-router-dom";
 import data from "../../data.json";
+import ReadRow from "./ReadRow";
+import EditRow from "./EditRow";
+import { nanoid } from "nanoid";
+import { MDBBtn } from "mdbreact";
 
 function Form() {
-  const [list, setList] = useState(data);
+  const [list, setList] = useState([]);
   const [addData, setAddData] = useState({
     Nazwa: "",
     Opis: "",
@@ -12,12 +16,13 @@ function Form() {
     Cena: "",
   });
 
-  const result = data.reduce(
-    (total, currentValue) => (total = total + currentValue.Cena),
-    0
-  );
-
-  console.log(result);
+  const [editFormData, setEditFormData] = useState({
+    Nazwa: "",
+    Opis: "",
+    Kategoria: "",
+    Cena: "",
+  });
+  const [editProdcutID, setProductID] = useState(null);
 
   const handleAddForm = (event) => {
     event.preventDefault();
@@ -31,10 +36,23 @@ function Form() {
     setAddData(newFormData);
   };
 
+  const handleEditFormChange = (event) => {
+    event.preventDefault();
+
+    const fieldName = event.target.getAttribute("name");
+    const fieldValue = event.target.value;
+
+    const newFormData = { ...editFormData };
+    newFormData[fieldName] = fieldValue;
+
+    setEditFormData(newFormData);
+  };
+
   const handleAddSubmit = (event) => {
     event.preventDefault();
 
     const newList = {
+      id: nanoid(),
       Nazwa: addData.Nazwa,
       Opis: addData.Opis,
       Kategoria: addData.Kategoria,
@@ -43,6 +61,69 @@ function Form() {
     const newLists = [...list, newList];
     setList(newLists);
   };
+
+  const handleEditFormSumbit = (event) => {
+    event.preventDefault();
+
+    const editedProduct = {
+      id: editProdcutID,
+      Nazwa: editFormData.Nazwa,
+      Opis: editFormData.Opis,
+      Kategoria: editFormData.Kategoria,
+      Cena: editFormData.Cena,
+    };
+    const newProduct = [...list];
+
+    const index = list.findIndex((product) => product.id === editProdcutID);
+
+    newProduct[index] = editedProduct;
+
+    setList(newProduct);
+    setProductID(null);
+  };
+
+  const handleEdit = (event, product) => {
+    event.preventDefault();
+    setProductID(product.id);
+
+    const formValues = {
+      Nazwa: product.Nazwa,
+      Opis: product.Opis,
+      Kategoria: product.Kategoria,
+      Cena: product.Cena,
+    };
+
+    setEditFormData(formValues);
+  };
+
+  const handleCancel = (event) => {
+    setProductID(null);
+  };
+
+  const handleDelete = (productID) => {
+    const newList = [...list];
+
+    const index = list.findIndex((product) => product.id === productID);
+    newList.splice(index, 1);
+
+    setList(newList);
+  };
+  useEffect(() => {
+    const json = localStorage.getItem("data2");
+    const savedList = JSON.parse(json);
+    if (savedList) {
+      setList(savedList);
+    }
+  }, []);
+  useEffect(() => {
+    const json = JSON.stringify(list);
+    localStorage.setItem("data2", json);
+  }, [list]);
+
+  const result = list.reduce(
+    (total, currentValue) => (total = total + parseInt(currentValue.Cena)),
+    0
+  );
 
   return (
     <>
@@ -58,6 +139,7 @@ function Form() {
                   required="required"
                   placeholder="Wprowadź nazwę..."
                   onChange={handleAddForm}
+                  className="form-control"
                 />
               </label>
               <label>
@@ -68,11 +150,17 @@ function Form() {
                   required="required"
                   placeholder="Wprowadź opis..."
                   onChange={handleAddForm}
+                  className="form-control"
                 />
               </label>
               <label>
                 Kategoria
-                <select name="Kategoria" onChange={handleAddForm}>
+                <select
+                  name="Kategoria"
+                  onChange={handleAddForm}
+                  className="browser-default custom-select"
+                >
+                  <option>Wybierz kategorię</option>
                   <option value="Podzespoły komputera">
                     Podzespoły komputera
                   </option>
@@ -90,6 +178,7 @@ function Form() {
                   name="Cena"
                   required="required"
                   placeholder="Wprowadź cenę..."
+                  className="form-control"
                   onChange={handleAddForm}
                   onKeyPress={(event) => {
                     if (!/[0-9]/.test(event.key)) {
@@ -105,37 +194,46 @@ function Form() {
             </Link>
           </div>
 
-          <div className="table-cont">
-            <table>
-              <thead>
-                <tr>
-                  <th>Nazwa</th>
-                  <th>Opis</th>
-                  <th>Kategoria</th>
-                  <th>Cena</th>
-                  <th>Suma</th>
-                </tr>
-              </thead>
-              <tbody>
-                {list.map((product) => (
+          <form onSubmit={handleEditFormSumbit}>
+            <div className="table-cont">
+              <table>
+                <thead>
                   <tr>
-                    <td>{product.Nazwa}</td>
-                    <td>{product.Opis}</td>
-                    <td>{product.Kategoria}</td>
-                    <td>{product.Cena}</td>
+                    <th>Nazwa</th>
+                    <th>Opis</th>
+                    <th>Kategoria</th>
+                    <th>Cena</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {list.map((product) => (
+                    <Fragment>
+                      {editProdcutID === product.id ? (
+                        <EditRow
+                          editFormData={editFormData}
+                          handleEditFormChange={handleEditFormChange}
+                          handleCancel={handleCancel}
+                        />
+                      ) : (
+                        <ReadRow
+                          product={product}
+                          handleEdit={handleEdit}
+                          handleDelete={handleDelete}
+                        />
+                      )}
+                    </Fragment>
+                  ))}
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Suma:</td>
                     <td>{result}</td>
                   </tr>
-                ))}
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td>Suma:</td>
-                  <td>{result}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+                </tbody>
+              </table>
+            </div>
+          </form>
         </div>
       </section>
     </>
