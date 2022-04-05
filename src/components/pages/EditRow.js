@@ -1,4 +1,5 @@
 import React from "react";
+import "./EditRow.css";
 
 const EditRow = ({ editFormData, handleEditFormChange, handleCancel }) => {
   return (
@@ -9,6 +10,7 @@ const EditRow = ({ editFormData, handleEditFormChange, handleCancel }) => {
           name="Nazwa"
           required="required"
           placeholder="Wprowadź nazwę..."
+          className="form-control"
           value={editFormData.Nazwa}
           onChange={handleEditFormChange}
         />
@@ -19,6 +21,7 @@ const EditRow = ({ editFormData, handleEditFormChange, handleCancel }) => {
           name="Opis"
           required="required"
           placeholder="Wprowadź opis..."
+          className="form-control"
           value={editFormData.Opis}
           onChange={handleEditFormChange}
         />
@@ -26,6 +29,7 @@ const EditRow = ({ editFormData, handleEditFormChange, handleCancel }) => {
       <td>
         <select
           name="Kategoria"
+          className="form-control"
           onChange={handleEditFormChange}
           value={editFormData.Kategoria}
         >
@@ -41,6 +45,7 @@ const EditRow = ({ editFormData, handleEditFormChange, handleCancel }) => {
           name="Cena"
           required="required"
           placeholder="Wprowadź cenę..."
+          className="form-control"
           onChange={handleEditFormChange}
           value={editFormData.Cena}
           onKeyPress={(event) => {

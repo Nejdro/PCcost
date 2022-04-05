@@ -1,7 +1,6 @@
 import React from "react";
 import "./Home.css";
-import {Link} from "react-router-dom"
-
+import { Link } from "react-router-dom";
 
 class Home extends React.Component {
   render() {
@@ -13,11 +12,17 @@ class Home extends React.Component {
               <h1>Ile będzie kosztowało Twoje nowe stanowisko?</h1>
               <h2>Policz to z nami!</h2>
               <p>
-              Sprawdź nasz kalkulator, dzięki któremu w łatwy sposób przeliczysz
-              całkowity kosz sprzętu. Podane pozycje zostaną zapisane w tabeli. 
+                Sprawdź nasz kalkulator, dzięki któremu w łatwy sposób
+                przeliczysz całkowity kosz sprzętu. Podane pozycje zostaną
+                zapisane w tabeli.
               </p>
               <Link to="/form">
-              <button id="btn">Zaczynajmy!</button>
+                <button className="addbtn">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>Zaczynajmy!
+                </button>
               </Link>
             </div>
           </div>
@@ -27,5 +32,3 @@ class Home extends React.Component {
   }
 }
 export default Home;
-
-

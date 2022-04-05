@@ -6,11 +6,10 @@
 
 .containter {
   width: 100%;
-  height: 100vh;
-  max-width: 1200px;
+  height: 100%;
   margin: 0 auto;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
 }
@@ -27,18 +26,86 @@
   font-size: 1.2rem;
   max-width: 60%;
 }
-.containter .info #btn {
-  text-decoration: none;
+
+.addbtn {
+  position: relative;
   display: inline-block;
-  background-color: white;
-  border-radius: 4px;
-  font-size: 1.8rem;
-  padding: 0.5em 2em;
-  margin-top: 2rem;
-  color: #ee6c09;
-  transition: 0.5s;
+  padding: 5px 10px;
+  margin: 20px 0px 20px 0px;
+  color: #2196f3;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-decoration: none;
+  font-size: 24px;
+  overflow: hidden;
+  transition: 0.2s;
+  background: transparent;
+  border-style: hidden;
 }
-.containter .info #btn:hover {
-  background-color: rgb(185, 178, 178);
-  color: #f0791d;
+
+.addbtn:hover {
+  color: #255784;
+  background: #2196f3;
+  box-shadow: 0 0 10px #2196f3, 0 0 40px #2196f3, 0 0 80px #2196f3;
+  transition-delay: 1s;
+}
+
+.addbtn span {
+  position: absolute;
+  display: block;
+}
+
+.addbtn span:nth-child(1) {
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #2196f3);
+}
+
+.addbtn:hover span:nth-child(1) {
+  left: 100%;
+  transition: 1s;
+}
+
+.addbtn span:nth-child(3) {
+  bottom: 0;
+  right: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #2196f3);
+}
+
+.addbtn:hover span:nth-child(3) {
+  right: 100%;
+  transition: 1s;
+  transition-delay: 0.5s;
+}
+
+.addbtn span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #2196f3);
+}
+
+.addbtn:hover span:nth-child(2) {
+  top: 100%;
+  transition: 1s;
+  transition-delay: 0.25s;
+}
+
+.addbtn span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #2196f3);
+}
+
+.addbtn:hover span:nth-child(4) {
+  bottom: 100%;
+  transition: 1s;
+  transition-delay: 0.75s;
 }
