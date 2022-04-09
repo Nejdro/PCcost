@@ -198,6 +198,7 @@ function Form() {
   /* Filtrowanie po kategorii, sumowanie cen */
 
   const result = list
+    // eslint-disable-next-line array-callback-return
     .filter((val) => {
       if (filterData === "") {
         return val;
@@ -364,6 +365,7 @@ function Form() {
                   </thead>
                   <tbody>
                     {list
+                      // eslint-disable-next-line array-callback-return
                       .filter((val) => {
                         if (filterData === "") {
                           return val;
