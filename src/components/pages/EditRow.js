@@ -59,10 +59,10 @@ const EditRow = ({ editFormData, handleEditFormChange, handleCancel }) => {
       </td>
       <td>
         <button className="editbtn" type="submit">
-          Save
+          Zapisz
         </button>
         <button className="editbtn" type="submit" onClick={handleCancel}>
-          Cancel
+          Anuluj
         </button>
       </td>
     </tr>
