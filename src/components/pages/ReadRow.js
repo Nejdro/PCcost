@@ -6,13 +6,23 @@ const ReadRow = ({ product, handleEdit, handleDelete }) => {
       <td>{product.Nazwa}</td>
       <td>{product.Opis}</td>
       <td>{product.Kategoria}</td>
-      <td>{product.Cena}</td>
-      <td>
-        <button type="button" onClick={(event) => handleEdit(event, product)}>
-          Edit
+      <td>{product.Cena} </td>
+      <td id="btnTD">
+        <button
+          type="button"
+          className="changebtn"
+          id="btn1"
+          onClick={(event) => handleEdit(event, product)}
+        >
+          Edytuj
         </button>
-        <button type="button" onClick={() => handleDelete(product.id)}>
-          Delete
+        <button
+          type="button"
+          className="changebtn"
+          id="btn2"
+          onClick={() => handleDelete(product.id)}
+        >
+          Usuń
         </button>
       </td>
     </tr>

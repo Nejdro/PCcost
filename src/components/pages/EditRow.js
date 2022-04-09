@@ -1,5 +1,6 @@
 import React from "react";
-import "./EditRow.css";
+import "../../style/EditRow.css";
+import NumberFormat from "react-number-format";
 
 const EditRow = ({ editFormData, handleEditFormChange, handleCancel }) => {
   return (
@@ -11,6 +12,7 @@ const EditRow = ({ editFormData, handleEditFormChange, handleCancel }) => {
           required="required"
           placeholder="Wprowadź nazwę..."
           className="form-control"
+          maxLength="20"
           value={editFormData.Nazwa}
           onChange={handleEditFormChange}
         />
@@ -22,6 +24,7 @@ const EditRow = ({ editFormData, handleEditFormChange, handleCancel }) => {
           required="required"
           placeholder="Wprowadź opis..."
           className="form-control"
+          maxLength="20"
           value={editFormData.Opis}
           onChange={handleEditFormChange}
         />
@@ -30,6 +33,7 @@ const EditRow = ({ editFormData, handleEditFormChange, handleCancel }) => {
         <select
           name="Kategoria"
           className="form-control"
+          required="required"
           onChange={handleEditFormChange}
           value={editFormData.Kategoria}
         >
@@ -40,24 +44,24 @@ const EditRow = ({ editFormData, handleEditFormChange, handleCancel }) => {
         </select>
       </td>
       <td>
-        <input
-          type="text"
+        <NumberFormat
           name="Cena"
           required="required"
           placeholder="Wprowadź cenę..."
           className="form-control"
+          suffix={" PLN"}
+          decimalSeparator="."
+          thousandSeparator={true}
+          maxLength="15"
           onChange={handleEditFormChange}
           value={editFormData.Cena}
-          onKeyPress={(event) => {
-            if (!/[0-9]/.test(event.key)) {
-              event.preventDefault();
-            }
-          }}
         />
       </td>
       <td>
-        <button type="submit">Save</button>
-        <button type="submit" onClick={handleCancel}>
+        <button className="editbtn" type="submit">
+          Save
+        </button>
+        <button className="editbtn" type="submit" onClick={handleCancel}>
           Cancel
         </button>
       </td>

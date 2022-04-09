@@ -1,16 +1,12 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./components/pages/Home";
-import Form from "./components/pages/Form";
+import { BrowserRouter as Router } from "react-router-dom";
+import AnimatedRoutes from "./components/pages/AnimatedRoutes";
 
 function App() {
   return (
     <div className="App">
       <Router>
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/form" element={<Form />} />
-        </Routes>
+        <AnimatedRoutes />
       </Router>
     </div>
   );

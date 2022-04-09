@@ -1,12 +1,18 @@
 import React from "react";
-import "./Home.css";
+import "../../style/Home.css";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 class Home extends React.Component {
   render() {
     return (
       <>
-        <section id="hero">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          id="hero"
+        >
           <div className="containter">
             <div className="info">
               <h1>Ile będzie kosztowało Twoje nowe stanowisko?</h1>
@@ -26,7 +32,7 @@ class Home extends React.Component {
               </Link>
             </div>
           </div>
-        </section>
+        </motion.div>
       </>
     );
   }

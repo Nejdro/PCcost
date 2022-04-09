@@ -1,0 +1,23 @@
+.form-control {
+  padding: 10px;
+  border-style: hidden;
+  width: 100%;
+}
+.editbtn {
+  position: relative;
+  display: inline-block;
+  color: #2196f3;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-decoration: none;
+  overflow: hidden;
+  transition: 0.2s;
+  background: transparent;
+  border-style: hidden;
+}
+.editbtn:hover {
+  color: #255784;
+  background: #2196f3;
+  box-shadow: 0 0 10px rgb(33, 150, 243), 0 0 40px #2196f3, 0 0 80px #2196f3;
+  transition-delay: 0.5s;
+}

@@ -109,3 +109,18 @@
   transition: 1s;
   transition-delay: 0.75s;
 }
+@media (max-width: 800px) {
+  .info {
+    text-align: center;
+  }
+  .containter .info p {
+    font-size: 1.2rem;
+    max-width: 80%;
+    margin: auto;
+  }
+}
+@media (max-height: 550px) {
+  #hero {
+    height: 100%;
+  }
+}
